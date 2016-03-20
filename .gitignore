@@ -1,0 +1,14 @@
+.tmp/
+bower_components/
+node_modules/
+.idea/
+
+build
+.tmp
+src/**/*.map
+src/**/*.js
+
+# Ignore Test reporters
+###################
+**/test/coverage
+report
