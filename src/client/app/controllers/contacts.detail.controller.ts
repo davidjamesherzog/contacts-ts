@@ -1,12 +1,12 @@
 namespace contacts {
   'use strict'
 
-  interface IContactsDetails {
+  interface IContactsDetailsController {
     contact: any;
     find: (name: string) => void
   }
 
-  export class ContactsDetailController implements IContactsDetails {
+  export class ContactsDetailController implements IContactsDetailsController {
 
     static $inject: Array<string> = ['$stateParams', 'ContactsService'];
     constructor(private $stateParams: ng.ui.IStateParamsService,

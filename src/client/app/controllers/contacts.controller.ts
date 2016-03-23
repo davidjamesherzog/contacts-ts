@@ -1,13 +1,13 @@
 namespace contacts {
   'use strict';
 
-  interface IContacts {
+  interface IContactsController {
     contacts: Array<any>;
     list: () => void,
     create: (contact: contacts.IContacts) => void
   }
 
-  export class ContactsController implements IContacts {
+  export class ContactsController implements IContactsController {
 
     static $inject: Array<string> = ['toastr', 'ContactsService'];
     constructor(private toastr: Toastr,

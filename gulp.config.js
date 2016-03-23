@@ -36,7 +36,7 @@ module.exports = function () {
     },
     // all javascript that we want to vet
     alljs: [
-      './src/**/*.js',
+      './src/test-helpers/*.js',
       './*.js'
     ],
     build: './build/',
