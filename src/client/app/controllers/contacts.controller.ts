@@ -15,18 +15,25 @@ namespace contacts {
       this.list();
     }
 
-    contacts: Array<any> = [];
-
+    contacts: Array<contacts.IContacts> = [];
 
     list() {
-      this.contacts = this.ContactsService.list();
+      this.ContactsService.list()
+        .then((response) => {
+          console.log('test');
+          this.contacts = response;
+        })
+        .catch((response) => {
+          toastr.error(response);
+        });
     }
 
     create(contact: contacts.IContacts) {
       this.ContactsService.create(contact);
       this.list();
-      toastr.success('Created Contact - ' + contact.name, 'Success');
+      toastr.success('Created Contact - ' + contact.firstName + ' ' + contact.lastName, 'Success');
     }
+
   }
 
   angular

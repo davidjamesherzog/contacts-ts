@@ -1,9 +1,9 @@
 namespace contacts {
-  'use strict'
+  'use strict';
 
   interface IContactsDetailsController {
-    contact: any;
-    find: (name: string) => void
+    contact: contacts.IContacts;
+    find: (id: string) => void
   }
 
   export class ContactsDetailController implements IContactsDetailsController {
@@ -11,13 +11,17 @@ namespace contacts {
     static $inject: Array<string> = ['$stateParams', 'ContactsService'];
     constructor(private $stateParams: ng.ui.IStateParamsService,
                 private ContactsService: contacts.IContactsService) {
-      this.find($stateParams['name']);
+      this.find($stateParams['id']);
     }
 
-    contact: any = null;
+    //var _this = this;
+    contact: contacts.IContacts = null;
 
-    find(name: string) {
-      this.contact = this.ContactsService.find(name);
+    find(id: string) {
+      this.ContactsService.find(id)
+        .then((response) => {
+          this.contact = response;
+        });
     }
 
   }
@@ -27,3 +31,5 @@ namespace contacts {
     .controller('ContactsDetailController', ContactsDetailController);
 
 }
+
+

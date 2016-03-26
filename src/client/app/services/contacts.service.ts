@@ -2,48 +2,71 @@ namespace contacts {
   'use strict';
 
   export interface IContactsService {
-    list: () => Array<contacts.IContacts>;
-    find: (name: string) => contacts.IContacts;
+    list: () => ng.IPromise<Array<contacts.IContacts>>;
+    find: (id: string) => ng.IPromise<contacts.IContacts>;
     create: (contact: contacts.IContacts) => void;
   }
 
   export class ContactsService implements IContactsService {
 
-    //static $inject: Array<string> = [];
-    constructor() {
+    static $inject: Array<string> = ['$resource', '$q'];
+    constructor(private $resource: ng.resource.IResourceService,
+                private $q: ng.IQService) {
     }
 
     list() {
+
+      let deferred = this.$q.defer();
+
       let contacts: Array<contacts.IContacts> = [];
 
-      for (let i = 0; i < localStorage.length; i++) {
-        let contact: contacts.IContacts = {
-          name: localStorage.key(i),
-          phone: localStorage[localStorage.key(i)]
-        };
-        contacts.push(contact);
-      }
+      let resource = this.$resource('/api/contacts/');
+      resource.query(function(response: Array<contacts.IContacts>) {
+        response.forEach(function(element: contacts.IContacts) {
+          let contact: contacts.IContacts = {
+            _id: element._id,
+            firstName: element.firstName,
+            lastName: element.lastName,
+            phone: element.phone
+          };
+          contacts.push(contact);
+        });
+        deferred.resolve(contacts);
+      });
 
-      return contacts;
+      return deferred.promise;
     }
 
-    find(name: string) {
+    find(id: string) {
 
-      let contact: contacts.IContacts = {
-        name: name,
-        phone: localStorage[name]
-      };
+      let deferred = this.$q.defer();
 
-      return contact;
+      let contact: contacts.IContacts = null;
+      let resource = this.$resource('/api/contacts/:id/', {id: id});
+      resource.get(function(response: contacts.IContacts) {
+        contact = {
+          _id: response._id,
+          firstName: response.firstName,
+          lastName: response.lastName,
+          phone: response.phone
+        };
+        console.log(contact);
+        deferred.resolve(contact);
+      });
+
+      return deferred.promise;
 
     }
 
     create(contact: contacts.IContacts) {
 
-      console.log('Name: ' + contact.name);
-      console.log('Phone: ' + contact.phone);
-
-      localStorage[contact.name] = contact.phone;
+      let resource = this.$resource('/api/contacts/');
+      resource.save(contact, function(response: contacts.IContacts) {
+        console.log('ID: ' + response._id);
+        console.log('First Name: ' + response.firstName);
+        console.log('Last Name: ' + response.lastName);
+        console.log('Phone: ' + response.phone);
+      });
 
     }
   }

@@ -16,3 +16,4 @@
 /// <reference path="serve-favicon/serve-favicon.d.ts" />
 /// <reference path="sinon/sinon.d.ts" />
 /// <reference path="toastr/toastr.d.ts" />
+/// <reference path="angularjs/angular-resource.d.ts" />

@@ -3,6 +3,7 @@ namespace contacts {
 
   angular.module('contactsApp', [
     'ui.router',
+    'ngResource',
     'toastr'
   ]);
 }

@@ -2,7 +2,9 @@ namespace contacts {
   'use strict';
 
   export interface IContacts {
-    name: string,
+    _id: string,
+    firstName: string,
+    lastName: string,
     phone: string
   }
 }

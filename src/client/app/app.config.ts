@@ -18,7 +18,7 @@ namespace contacts {
       })
 
       .state('details', {
-        url: '/details/:name',
+        url: '/details/:id',
         templateUrl: 'app/layout/contact.details.html',
         controller: 'ContactsDetailController',
         controllerAs: 'vm'
