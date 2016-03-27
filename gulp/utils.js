@@ -281,7 +281,8 @@ module.exports = function () {
     // If build: watches the files, builds, and restarts browser-sync.
     // If dev: watches less and typescript, compiles it to css and javascript, browser-sync handles reload
     if (isDev) {
-      gulp.watch([config.less, config.ts.clientts, config.ts.serverts], ['build:styles', 'tsc:client', 'tsc:server'])
+      //gulp.watch([config.less, config.ts.clientts, config.ts.serverts], ['build:styles', 'tsc:client', 'tsc:server'])
+      gulp.watch([config.less], ['build:styles'])
         .on('change', changeEvent);
     } else {
       gulp.watch([config.less, config.js, config.html], ['build:optimize', browserSync.reload])

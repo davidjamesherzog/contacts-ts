@@ -6,7 +6,7 @@ node_modules/
 build
 .tmp
 src/**/*.map
-src/**/*.js
+src/client/**/*.js
 
 # Ignore Test reporters
 ###################

@@ -20,7 +20,7 @@ namespace contacts {
     list() {
       this.ContactsService.list()
         .then((response) => {
-          console.log('test');
+          console.log('testing');
           this.contacts = response;
         })
         .catch((response) => {

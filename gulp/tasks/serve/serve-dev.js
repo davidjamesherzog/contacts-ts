@@ -7,7 +7,7 @@ module.exports = function (gulp, config, plugins) {
    * --nosync
    */
   return {
-    deps: ['build:inject'],
+    deps: ['build:inject', 'tsc:watcher'],
     fn: function () {
       plugins.utils.serve(true /*isDev*/);
     }
