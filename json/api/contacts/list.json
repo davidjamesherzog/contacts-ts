@@ -1,0 +1,32 @@
+[
+  {
+    "_id": "56d765240b76fee631c409ef",
+    "firstName": "Jim",
+    "lastName": "Smith",
+    "phone": "555-555-5555"
+  },
+  {
+    "_id": "56d7b3bdb59be88d3e778012",
+    "firstName": "Tom",
+    "lastName": "Hardy",
+    "phone": "555-555-5555"
+  },
+  {
+    "_id": "56f1f4f9fbe6c08034fac678",
+    "firstName": "Bob",
+    "lastName": "Smith",
+    "phone": "777-555-5555"
+  },
+  {
+    "_id": "56f49c7b6becb3df28f209c4",
+    "firstName": "Tony",
+    "lastName": "Hernandez",
+    "phone": "123-456-7890"
+  },
+  {
+    "_id": "56f4a023cb44bb6529407ef3",
+    "firstName": "John",
+    "lastName": "Miller",
+    "phone": "123-456-7890"
+  }
+]

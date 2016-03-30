@@ -4,7 +4,7 @@ namespace contacts {
   export interface IContactsService {
     list: () => ng.IPromise<Array<contacts.IContacts>>;
     find: (id: string) => ng.IPromise<contacts.IContacts>;
-    create: (contact: contacts.IContacts) => void;
+    create: (contact: contacts.IContacts) => ng.IPromise<contacts.IContacts>;
   }
 
   export class ContactsService implements IContactsService {
@@ -20,9 +20,9 @@ namespace contacts {
 
       let contacts: Array<contacts.IContacts> = [];
 
-      let resource = this.$resource('/api/contacts/');
-      resource.query(function(response: Array<contacts.IContacts>) {
-        response.forEach(function(element: contacts.IContacts) {
+      let success = (response: Array<contacts.IContacts>) => {
+
+        response.forEach((element: contacts.IContacts) => {
           let contact: contacts.IContacts = {
             _id: element._id,
             firstName: element.firstName,
@@ -31,8 +31,12 @@ namespace contacts {
           };
           contacts.push(contact);
         });
+
         deferred.resolve(contacts);
-      });
+      };
+
+      let resource = this.$resource('/api/contacts/');
+      resource.query(success);
 
       return deferred.promise;
     }
@@ -42,8 +46,8 @@ namespace contacts {
       let deferred = this.$q.defer();
 
       let contact: contacts.IContacts = null;
-      let resource = this.$resource('/api/contacts/:id/', {id: id});
-      resource.get(function(response: contacts.IContacts) {
+
+      let success = (response: contacts.IContacts) => {
         contact = {
           _id: response._id,
           firstName: response.firstName,
@@ -52,7 +56,10 @@ namespace contacts {
         };
         console.log(contact);
         deferred.resolve(contact);
-      });
+      };
+
+      let resource = this.$resource('/api/contacts/:id/', {id: id});
+      resource.get(success);
 
       return deferred.promise;
 
@@ -60,13 +67,20 @@ namespace contacts {
 
     create(contact: contacts.IContacts) {
 
-      let resource = this.$resource('/api/contacts/');
-      resource.save(contact, function(response: contacts.IContacts) {
+      let deferred = this.$q.defer();
+
+      let success = (response: contacts.IContacts) => {
         console.log('ID: ' + response._id);
         console.log('First Name: ' + response.firstName);
         console.log('Last Name: ' + response.lastName);
         console.log('Phone: ' + response.phone);
-      });
+        deferred.resolve(response);
+      };
+
+      let resource = this.$resource('/api/contacts/');
+      resource.save(contact, success);
+
+      return deferred.promise;
 
     }
   }

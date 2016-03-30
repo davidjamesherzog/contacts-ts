@@ -165,6 +165,8 @@ module.exports = function () {
   function getKarmaOptions() {
     var options = {
       files: [].concat(
+        {pattern: 'json/**/*.json', included: false},
+        './node_modules/karma-read-json/karma-read-json.js',
         bowerFiles,
         config.specHelpers,
         clientApp + '**/*.module.js',

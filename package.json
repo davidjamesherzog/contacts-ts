@@ -64,6 +64,7 @@
     "karma-growl-reporter": "^0.1.1",
     "karma-mocha": "^0.1.4",
     "karma-phantomjs-launcher": "^0.1.4",
+    "karma-read-json": "^1.1.0",
     "karma-safari-launcher": "^0.1.1",
     "karma-sinon": "^1.0.3",
     "lodash": "^2.4.1",

@@ -29,7 +29,13 @@ namespace contacts {
     }
 
     create(contact: contacts.IContacts) {
-      this.ContactsService.create(contact);
+      this.ContactsService.create(contact)
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((response) => {
+          toastr.error(response);
+        });
       this.list();
       toastr.success('Created Contact - ' + contact.firstName + ' ' + contact.lastName, 'Success');
     }
