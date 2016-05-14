@@ -56,9 +56,15 @@ var contactController = function(Contact) {
     //  res.status(400);
     //  res.send('Title is required');
     //} else {
-    contact.save();
-    res.status(201);
-    res.send(contact);
+    contact.save(function(err) {
+      if (err)
+        res.status(500).send(err);
+      else{
+        res.status(201);
+        res.send(contact);
+      }
+    });
+
     //}
 
   }
