@@ -38,26 +38,8 @@ describe('Contacts Controller', function () {
 
   describe('create', function () {
 
-    var responseObject;
-    var functionObject;
-
-    beforeEach(function() {
-
-      responseObject = {};
-      functionObject = {
-        success: function(response) {
-          responseObject = response;
-        },
-        failure: function(response) {
-          responseObject = response;
-        }
-      };
-      spyOn(functionObject, 'success').and.callThrough();
-      spyOn(functionObject, 'failure').and.callThrough();
-    });
-
     it('should create new contact', function () {
-      //contacts = mockData.getMockContacts();
+
       var contact = {
         name: 'test',
         phone: '555-555-5555'

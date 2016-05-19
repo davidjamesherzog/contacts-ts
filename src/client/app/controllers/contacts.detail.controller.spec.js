@@ -20,7 +20,6 @@ describe('Contacts Detail Controller', function () {
 
     spyOn(ContactsService, 'find').and.returnValue($q.when(api.contacts.find.success));
 
-    //controller = $controller('ContactsDetailController');
     controller = $controller('ContactsDetailController', {
       $stateParams: $stateParams,
       ContactsService: ContactsService
@@ -46,11 +45,11 @@ describe('Contacts Detail Controller', function () {
 
       $rootScope.$apply();
 
-      /*expect(controller.contact).to.exist;
-      expect(controller.contact.id).to.be.equal(id);
-      expect(controller.contact.firstName).to.be.equal('Jim');
-      expect(controller.contact.lastName).to.be.equal('Smith');
-      expect(controller.contact.phone).to.be.equal('555-555-5555');*/
+      expect(controller.contact).toBeDefined();
+      expect(controller.contact._id).toEqual(id);
+      expect(controller.contact.firstName).toEqual('Jim');
+      expect(controller.contact.lastName).toEqual('Smith');
+      expect(controller.contact.phone).toEqual('555-555-5555');
     });
 
   });
