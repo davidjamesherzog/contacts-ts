@@ -294,6 +294,7 @@ module.exports = function () {
       port: 3000,
       files: isDev ? [
         config.client + '**/*.*',
+        '!' + config.client + '**/*.ts',
         '!' + config.less,
         config.temp + '**/*.css'
       ] : [],

@@ -18,10 +18,19 @@ namespace contacts {
     contact: contacts.IContacts = null;
 
     find(id: string) {
+
+      let success = (response) => {
+        this.contact = response;
+      };
+
+      let error = (response) => {
+        console.log(response);
+        toastr.error(response);
+      };
+
       this.ContactsService.find(id)
-        .then((response) => {
-          this.contact = response;
-        });
+        .then(success)
+        .catch(error);
     }
 
   }

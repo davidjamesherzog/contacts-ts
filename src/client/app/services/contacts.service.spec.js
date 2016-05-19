@@ -4,8 +4,6 @@ describe('Contacts Service', function () {
 
   var responseObject;
   var functionObject;
-  var spySuccess;
-  var spyFailure;
   var id = '56d765240b76fee631c409ef';
 
   var api = {
@@ -41,13 +39,12 @@ describe('Contacts Service', function () {
         responseObject = response;
       }
     };
-    spySuccess = sinon.spy(functionObject, 'success');
-    spyFailure = sinon.spy(functionObject, 'failure');
-
+    spyOn(functionObject, 'success').and.callThrough();
+    spyOn(functionObject, 'failure').and.callThrough();
   });
 
   it('exists', function () {
-    expect(ContactsService).to.exist;
+    expect(ContactsService).toBeDefined();
   });
 
   describe('list', function() {
@@ -60,18 +57,17 @@ describe('Contacts Service', function () {
 
       $httpBackend.flush();
 
-      expect(spySuccess).to.have.been.called;
-      expect(spyFailure).not.to.have.been.called;
+      expect(functionObject.success).toHaveBeenCalled();
+      expect(functionObject.failure).not.toHaveBeenCalled();
 
-      expect(responseObject).to.have.length(5);
-      expect(responseObject[0]._id).to.be.equal(id);
-      expect(responseObject[0].firstName).to.be.equal('Jim');
-      expect(responseObject[0].lastName).to.be.equal('Smith');
-      expect(responseObject[0].phone).to.be.equal('555-555-5555');
+      expect(responseObject.length).toEqual(5);
+      expect(responseObject[0]._id).toEqual(id);
+      expect(responseObject[0].firstName).toEqual('Jim');
+      expect(responseObject[0].lastName).toEqual('Smith');
+      expect(responseObject[0].phone).toEqual('555-555-5555');
     });
 
   });
-
 
   describe('find', function() {
 
@@ -83,13 +79,13 @@ describe('Contacts Service', function () {
 
       $httpBackend.flush();
 
-      expect(spySuccess).to.have.been.called;
-      expect(spyFailure).not.to.have.been.called;
+      expect(functionObject.success).toHaveBeenCalled();
+      expect(functionObject.failure).not.toHaveBeenCalled();
 
-      expect(responseObject._id).to.be.equal(id);
-      expect(responseObject.firstName).to.be.equal('Jim');
-      expect(responseObject.lastName).to.be.equal('Smith');
-      expect(responseObject.phone).to.be.equal('555-555-5555');
+      expect(responseObject._id).toEqual(id);
+      expect(responseObject.firstName).toEqual('Jim');
+      expect(responseObject.lastName).toEqual('Smith');
+      expect(responseObject.phone).toEqual('555-555-5555');
     });
 
   });
@@ -105,13 +101,13 @@ describe('Contacts Service', function () {
 
       $httpBackend.flush();
 
-      expect(spySuccess).to.have.been.called;
-      expect(spyFailure).not.to.have.been.called;
+      expect(functionObject.success).toHaveBeenCalled();
+      expect(functionObject.failure).not.toHaveBeenCalled();
 
-      expect(responseObject._id).to.be.equal(id);
-      expect(responseObject.firstName).to.be.equal('Jim');
-      expect(responseObject.lastName).to.be.equal('Smith');
-      expect(responseObject.phone).to.be.equal('555-555-5555');
+      expect(responseObject._id).toEqual(id);
+      expect(responseObject.firstName).toEqual('Jim');
+      expect(responseObject.lastName).toEqual('Smith');
+      expect(responseObject.phone).toEqual('555-555-5555');
     });
 
   });
