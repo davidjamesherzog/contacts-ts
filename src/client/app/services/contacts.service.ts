@@ -41,7 +41,7 @@ namespace contacts {
       return deferred.promise;
     }
 
-    find(id: string) {
+    find(id: string) : ng.IPromise<contacts.IContacts> {
 
       let deferred = this.$q.defer();
 
@@ -70,10 +70,6 @@ namespace contacts {
       let deferred = this.$q.defer();
 
       let success = (response: contacts.IContacts) => {
-        console.log('ID: ' + response._id);
-        console.log('First Name: ' + response.firstName);
-        console.log('Last Name: ' + response.lastName);
-        console.log('Phone: ' + response.phone);
         deferred.resolve(response);
       };
 

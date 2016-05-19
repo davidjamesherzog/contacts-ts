@@ -125,10 +125,10 @@ module.exports = function () {
      *  6 templates
      */
     testlibraries: [
-      nodeModules + '/mocha/mocha.js',
-      nodeModules + '/chai/chai.js',
-      nodeModules + '/mocha-clean/index.js',
-      nodeModules + '/sinon-chai/lib/sinon-chai.js'
+      nodeModules + '/jasmine-core/lib/jasmine-core/jasmine.js',
+      nodeModules + '/jasmine-core/lib/jasmine-core/jasmine-html.js',
+      nodeModules + '/jasmine-core/lib/jasmine-core/boot.js',
+      nodeModules + '/karma-read-json/karma-read-json.js'
     ],
     specHelpers: [client + 'test-helpers/*.js'],
     specs: [clientApp + '**/*.spec.js'],
