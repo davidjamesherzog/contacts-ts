@@ -18,26 +18,38 @@ namespace contacts {
     contacts: Array<contacts.IContacts> = [];
 
     list() {
+
+      let success = (response) => {
+        console.log('success');
+        this.contacts = response;
+      };
+
+      let error = (response) => {
+        toastr.error(response);
+      };
+
       this.ContactsService.list()
-        .then((response) => {
-          console.log('testing');
-          this.contacts = response;
-        })
-        .catch((response) => {
-          toastr.error(response);
-        });
+        .then(success)
+        .catch(error);
     }
 
-    create(contact: contacts.IContacts) {
+    public create(contact: contacts.IContacts) {
+
+      let success = (response) => {
+        console.log(response);
+        this.list();
+        toastr.success('Created Contact - ' + contact.firstName + ' ' + contact.lastName, 'Success');
+      };
+
+      let error = (response) => {
+        console.log(response);
+        toastr.error(response);
+      };
+
       this.ContactsService.create(contact)
-        .then((response) => {
-          console.log(response);
-        })
-        .catch((response) => {
-          toastr.error(response);
-        });
-      this.list();
-      toastr.success('Created Contact - ' + contact.firstName + ' ' + contact.lastName, 'Success');
+        .then(success)
+        .catch(error);
+      
     }
 
   }
