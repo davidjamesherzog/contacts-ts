@@ -39,6 +39,9 @@ module.exports = function () {
       './src/test-helpers/*.js',
       './*.js'
     ],
+    allless: [
+      './src/client/styles/*.less'
+    ],
     build: './build/',
     client: client,
     css: temp + 'styles.css',
