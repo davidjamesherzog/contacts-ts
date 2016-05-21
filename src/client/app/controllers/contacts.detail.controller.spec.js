@@ -1,8 +1,8 @@
 /* jshint -W117, -W030 */
 describe('Contacts Detail Controller', function () {
   var controller;
-  var spy;
 
+  readJSON.base = '/';
   var api = {
     contacts: {
       find: {

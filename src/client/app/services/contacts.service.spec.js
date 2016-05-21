@@ -6,6 +6,7 @@ describe('Contacts Service', function () {
   var functionObject;
   var id = '56d765240b76fee631c409ef';
 
+  readJSON.base = '/';
   var api = {
     contacts: {
       list: {
