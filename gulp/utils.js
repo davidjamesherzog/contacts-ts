@@ -5,6 +5,7 @@ module.exports = function () {
     path = require('path'),
     args = require('yargs').argv,
     config = require('../gulp.config')(),
+    ts = require('gulp-typescript'),
     plato = require('plato'),
     glob = require('glob'),
     browserSync = require('browser-sync'),
@@ -348,18 +349,20 @@ module.exports = function () {
   }
 
   function runTSC(directory, done) {
-    var tscjs = path.join(process.cwd(), 'node_modules/typescript/bin/tsc');
-    var childProcess = cp.spawn('node', [tscjs, '-p', directory], {cwd: process.cwd()});
-    childProcess.stdout.on('data', function (data) {
-      // Ticino will read the output
-      console.log(data.toString());
-    });
-    childProcess.stderr.on('data', function (data) {
-      // Ticino will read the output
-      console.log(data.toString());
-    });
-    childProcess.on('close', function () {
-      done();
-    });
+
+    return gulp.src(directory + '/**/*.ts')
+      .pipe($.sourcemaps.init())
+      .pipe(ts({
+        noImplicitAny: false,
+        target: 'ES5'
+      }))
+
+      //write comments to tell istanbul to ignore the code inside the iife parameters
+      .js.pipe($.replace(/(}\)\()(.*\|\|.*;)/g, '$1/* istanbul ignore next */$2'))
+
+      //write comments to tell istanbul to ignore the extends code that typescript generates
+      .pipe($.replace(/(var __extends = \(this && this.__extends\))/g, '$1/* istanbul ignore next */'))
+      .pipe($.sourcemaps.write('./'))
+      .pipe(gulp.dest(directory));
   }
 };
